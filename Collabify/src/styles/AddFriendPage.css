@@ -176,13 +176,14 @@
 /* ================= TASK CARD ================= */
 
 .task-cardAddFriend{
-  width:1130px;
+  width:1140px;
   background:white;
   padding:0px;
   border-radius:6px;
   height: 440px;
   border:1px solid #CDC9C6;
   margin-left: -50px;
+  overflow: auto;
 }
 
 .task-cardAddFriend h2{
@@ -223,6 +224,9 @@
 .AddFriendList{
   display: flex;
   gap: 10px;
+  row-gap: 25px;
+  flex-wrap: wrap;
+  max-height: 370px;
 }
 
 .AddFriendLeft{

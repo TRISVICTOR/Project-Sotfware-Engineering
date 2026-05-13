@@ -70,7 +70,7 @@ router.get('/users/random', authMiddleware, async (req, res) => {
       where: { id: { [Op.ne]: req.user.id } },
       attributes: ['id', 'nama', 'email'],
       order: [['createdAt', 'DESC']],
-      limit: 10,
+      limit: 100,
     });
     res.json(users);
   } catch (err) {

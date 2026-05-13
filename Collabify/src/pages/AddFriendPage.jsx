@@ -24,7 +24,8 @@ function AddPageFriend() {
   const [friends, setFriends] = useState([]);
   const [loadingSearch, setLoadingSearch] = useState(false);
   const [message, setMessage] = useState('');
-  const [addedIds, setAddedIds] = useState([]); // track siapa yang sudah ditambah
+  const [addedIds, setAddedIds] = useState([]);
+  const [friendsData, setFriendsData] = useState([]);
 
   // Ambil user acak & daftar teman saat halaman dibuka
   useEffect(() => {
@@ -41,6 +42,7 @@ function AddPageFriend() {
       .then(data => {
         const friendIds = data.map(f => f.friend_id);
         setAddedIds(friendIds);
+        setFriendsData(data);
       })
       .catch(err => console.error('Gagal ambil friends:', err));
   }, []);
@@ -83,7 +85,14 @@ function AddPageFriend() {
   };
 
   // List yang ditampilkan: kalau search ada hasil → tampil hasil, kalau tidak → tampil acak
-  const displayList = searchResult ? [searchResult] : randomUsers;
+  const mergedList = [
+    ...randomUsers,
+    ...friendsData
+      .filter(f => !randomUsers.find(u => String(u.id) === String(f.friend_id)))
+      .map(f => ({ id: f.friend_id, nama: f.nama, email: f.email }))
+  ];
+
+  const displayList = searchResult ? [searchResult] : mergedList;
 
   return (
     <div className="AddFriendpage">

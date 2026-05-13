@@ -25,7 +25,7 @@ function HomePage() {
   useEffect(() => {
     setLoading(true);
     getMyTasks()
-      .then(data => setTasks(data.slice(0, 3)))
+      .then(data => setTasks(data))
       .catch(err => console.error('Gagal ambil task:', err))
       .finally(() => setLoading(false));
   }, [location]);

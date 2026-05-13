@@ -171,6 +171,7 @@
 
 .task-cardMyTask{
   width:1100px;
+  overflow-y: auto;
   background:white;
   padding:0px;
   border-radius:6px;

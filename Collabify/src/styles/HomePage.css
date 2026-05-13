@@ -179,6 +179,7 @@
 
 .task-card{
   width:800px;
+  overflow-y: auto;
   background:white;
   padding:0px;
   border-radius:6px;
