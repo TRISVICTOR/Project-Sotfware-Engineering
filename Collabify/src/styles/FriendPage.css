@@ -1,0 +1,278 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ================= PAGE ================= */
+
+.Friendpage{
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Nunito', sans-serif;
+  overflow: hidden;
+}
+
+.friend-wrapper{
+  width:1600px;
+  height:725px;
+  background:#ffffff;
+
+  display:flex;
+  flex-direction:column;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbarFriend{
+  height:90px;
+  background:white;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 80px;
+  margin-top: -10px;
+  z-index: 10;
+}
+
+.logoFriend img{
+  height:210px;
+}
+
+.nav-buttons{
+  display:flex;
+  gap:20px;
+}
+
+.add-task{
+  background:#8f75ff;
+  color:white;
+  border:none;
+  padding:10px 20px;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.add-friend{
+  background:white;
+  border:1px solid black;
+  padding:10px 18px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* ================= PEOPLE BANNER ================= */
+
+.header-background{
+  width:100%;
+  height:250px;
+  overflow:hidden;
+  margin-top: -70px;
+  margin-bottom: 30px;
+  z-index: 1;
+}
+
+.header-background img{
+  width: 1510px;
+  height: 250px;
+  object-fit: cover;
+}
+
+/* ================= MAIN AREA ================= */
+
+.main-container{
+  display:flex;
+  width: 1300px;
+  gap:60px;
+  margin-left: 100px;
+  margin-top:-120px;
+  margin-bottom: -20px;
+  z-index:2;
+  background: #ffffff;
+  border-radius:8px;
+  padding:40px 80px;
+  height: 480px;
+  border: #CDC9C6 solid 1px;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+  width:100px;
+  margin-top:100px;
+  margin-left: -50px;
+  height: 130px;
+  display:flex;
+  justify-content:center; /* tengah horizontal */
+  align-items:center;
+}
+
+.sidebar li{
+  display:flex;
+  align-items:center;
+  gap:5px;
+
+  margin-bottom:28px;
+  font-size:16px;
+  color:#888;
+  width: 100px;
+
+  cursor:pointer;
+}
+
+.sidebar img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  filter: grayscale(1) opacity(0.5);
+}
+
+.sidebar .active{
+  color:#C89B6D;
+  font-weight:600;
+}
+
+.sidebar .active img{
+  filter: sepia(1) saturate(2) hue-rotate(5deg) brightness(0.9);
+}
+
+.sidebar-profile img {
+  width: 15px;
+  height: 15px;
+  margin-left: 4px;
+  object-fit: contain;
+  filter: grayscale(1) opacity(0.5); /* abu-abu saat tidak aktif */
+}
+
+/* ================= CONTENT ================= */
+
+.content{
+  flex:1;
+}
+
+.welcome{
+  font-size:42px;
+  margin-bottom:30px;
+  margin-left: -150px;
+  font-family: Alexandria;
+}
+
+/* ================= TASK CARD ================= */
+
+.task-cardFriend{
+  width:1130px;
+  background:white;
+  padding:0px;
+  border-radius:6px;
+  height: 360px;
+  border:1px solid #CDC9C6;
+  margin-left: -50px;
+  margin-top: -20px;
+}
+
+.task-cardFriend h2{
+  margin-bottom:0px;
+  margin-left: 5px;
+}
+
+.searchFriend-wrapper{
+  position: relative;
+  width: 130px;
+  margin-left: 10px;
+}
+
+/* ICON */
+.search-iconFriend{
+  position: absolute;
+  margin-left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+}
+
+/* INPUT */
+.search-inputFriend{
+  width: 100%;
+  padding: 10px 10px 10px 35px; 
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+}
+
+.FriendList{
+  display: flex;
+  gap: 10px;
+}
+
+.FriendLeft{
+  display: flex;
+  align-items: center;
+
+  border: 1px solid #9E9E9E;
+  border-radius: 10px;
+  height: 50px;
+
+  width: 350px;
+  background: #f5f5f5;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+.FriendMiddle{
+  display: flex;
+  align-items: center;
+
+  border: 1px solid #9E9E9E;
+  border-radius: 10px;
+  height: 50px;
+
+  width: 350px;
+  background: #f5f5f5;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+.FriendRight{
+  display: flex;
+  align-items: center;
+
+  border: 1px solid #9E9E9E;
+  border-radius: 10px;
+  height: 50px;
+
+  width: 350px;
+  background: #f5f5f5;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+.BoyGirl-Icon{
+  width: 40px;
+  height: 40px;
+  margin-left: 5px;
+}
+
+.friend-info h4{
+  font-size: 18px;
+  color: #333;
+  margin-left: 10px;
+}
+
+.plantMyTask{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:260px;
+  z-index: 10;
+}
