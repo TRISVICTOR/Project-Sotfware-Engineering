@@ -12,9 +12,7 @@ import AssignmentGroup from "./pages/AssignmentTaskIfAGroupProject"
 import ProfilePage from "./pages/ProfilePage"
 import ChangePassword from "./pages/ChangePasswordPage"
 import ChangeUsernameEmail from "./pages/ChangeUsernameEmailPage"
-import NotificationSound from "./component/NotificationSound";
 
-// Komponen proteksi: kalau belum login, lempar ke /login
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth()
   if (loading) return <div>Loading...</div>
@@ -22,7 +20,6 @@ const ProtectedRoute = ({ children }) => {
   return children
 }
 
-// Komponen kebalikannya: kalau sudah login, lempar ke /home
 const GuestRoute = ({ children }) => {
   const { user, loading } = useAuth()
   if (loading) return <div>Loading...</div>
@@ -33,20 +30,19 @@ const GuestRoute = ({ children }) => {
 function App() {
   return (
     <BrowserRouter>
-      <NotificationSound />
       <Routes>
 
-        {/* Halaman untuk yang BELUM login */}
+        {/* Halaman BELUM login */}
         <Route path="/" element={<PageAwal />} />
-        <Route path="/login"  element={<GuestRoute><Login /></GuestRoute>} />
+        <Route path="/login" element={<GuestRoute><Login /></GuestRoute>} />
         <Route path="/signup" element={<GuestRoute><Signup /></GuestRoute>} />
 
-        {/* Halaman untuk yang SUDAH login */}
-        <Route path="/home"         element={<ProtectedRoute><Home /></ProtectedRoute>} />
-        <Route path="/mytask"       element={<ProtectedRoute><PageMyTask /></ProtectedRoute>} />
-        <Route path="/friend"       element={<ProtectedRoute><PageFriend /></ProtectedRoute>} />
-        <Route path="/addtask"      element={<ProtectedRoute><AddTaskPage /></ProtectedRoute>} />
-        <Route path="/addfriend"    element={<ProtectedRoute><AddFriendPage /></ProtectedRoute>} />
+        {/* Halaman SUDAH login */}
+        <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        <Route path="/mytask" element={<ProtectedRoute><PageMyTask /></ProtectedRoute>} />
+        <Route path="/friend" element={<ProtectedRoute><PageFriend /></ProtectedRoute>} />
+        <Route path="/addtask" element={<ProtectedRoute><AddTaskPage /></ProtectedRoute>} />
+        <Route path="/addfriend" element={<ProtectedRoute><AddFriendPage /></ProtectedRoute>} />
         <Route path="/groupproject" element={<ProtectedRoute><AssignmentGroup /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
         <Route path="/changepassword" element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />

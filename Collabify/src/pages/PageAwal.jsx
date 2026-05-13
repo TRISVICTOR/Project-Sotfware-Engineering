@@ -104,4 +104,4 @@ function PageAwal() {
   )
 }
 
-export default PageAwal
+export default PageAwal;
