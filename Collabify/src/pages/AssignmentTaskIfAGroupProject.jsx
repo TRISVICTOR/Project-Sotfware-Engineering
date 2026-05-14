@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { getGroupById, addMember } from "../api/groupApi";
 import { getFriends } from "../api/friendApi";
 import { createTask, uploadFileLampiran, updateTask } from "../api/taskApi";
+import { useAuth } from "../context/AuthContext";
 
 import logo from "../assets/LOGOWB.png"
 import plant from "../assets/TanamanPageHome.png"
@@ -22,6 +23,7 @@ import NotificationSound from '../component/NotificationSound';
 function AssignmentTaskIfAGroupProject() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useAuth();
 
   const groupId = location.state?.groupId;
 
@@ -40,7 +42,6 @@ function AssignmentTaskIfAGroupProject() {
   const [error, setError] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
   const [loadingCreate, setLoadingCreate] = useState(false);
-  const [myUserId, setMyUserId] = useState(null);
 
   useEffect(() => {
     if (!groupId) return;
@@ -49,11 +50,6 @@ function AssignmentTaskIfAGroupProject() {
         setGroup(groupData.group);
         setFriends(friendData);
 
-        if (friendData.length > 0) {
-          setMyUserId(friendData[0].user_id);
-        }
-
-        // ✅ Bagian yang hilang — auto add member
         const currentMemberIds = groupData.members.map(m => m.user_id);
         for (const f of friendData) {
           const friendId = f.friend_id;
@@ -61,15 +57,12 @@ function AssignmentTaskIfAGroupProject() {
             try {
               await addMember(groupId, friendId);
               currentMemberIds.push(friendId);
-            } catch (err) {
-              // abaikan
-            }
+            } catch (err) {}
           }
         }
 
-        // ✅ Refresh group setelah add member
         const updatedGroup = await getGroupById(groupId);
-        setMembers(updatedGroup.members); // ← sekarang sudah ada .nama dari backend
+        setMembers(updatedGroup.members);
 
         const taskUtama = updatedGroup.tasks.find(
           t => t.judul === groupData.group.nama_group
@@ -78,11 +71,18 @@ function AssignmentTaskIfAGroupProject() {
           t => t.judul !== groupData.group.nama_group
         );
 
+        // ← sorting di sini
+        assignmentSaja.sort((a, b) => {
+          const aUrut = String(a.assigned_to) === String(user?.id) ? 0 : 1;
+          const bUrut = String(b.assigned_to) === String(user?.id) ? 0 : 1;
+          return aUrut - bUrut;
+        });
+
         if (taskUtama) setDeadlineKeseluruhan(taskUtama.deadline);
         setTasks(assignmentSaja);
       })
       .catch(err => console.error('Gagal ambil data group:', err))
-      .finally(() => setLoading(false)); // ✅ Ini juga hilang sebelumnya
+      .finally(() => setLoading(false));
   }, [groupId]);
 
   const formatDeadline = (dateStr) => {
@@ -93,10 +93,9 @@ function AssignmentTaskIfAGroupProject() {
   };
 
   const getNama = (userId) => {
-    if (String(userId) === String(myUserId)) return 'Saya';
+    if (String(userId) === String(user?.id)) return user?.nama || 'Saya';
     const friend = friends.find(f => String(f.friend_id) === String(userId));
-    if (friend?.nama) return friend.nama;
-    return 'Saya'; // fallback — kalau tidak ketemu di friends, berarti diri sendiri
+    return friend?.nama || `User #${userId}`;
   };
 
   const handleSelesaiAssignment = async (taskId) => {
@@ -135,6 +134,13 @@ function AssignmentTaskIfAGroupProject() {
       const assignmentSaja = updatedGroup.tasks.filter(
         t => t.judul !== group?.nama_group
       );
+
+      assignmentSaja.sort((a, b) => {
+        const aUrut = String(a.assigned_to) === String(user?.id) ? 0 : 1;
+        const bUrut = String(b.assigned_to) === String(user?.id) ? 0 : 1;
+        return aUrut - bUrut;
+      });
+
       setTasks(assignmentSaja);
 
       // Reset form
