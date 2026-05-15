@@ -33,6 +33,9 @@ function AssignmentTaskIfAGroupProject() {
   const [friends, setFriends] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deadlineKeseluruhan, setDeadlineKeseluruhan] = useState(null);
+  const [submissions, setSubmissions] = useState([]);
+  const [submissionFile, setSubmissionFile] = useState(null);
+  const [uploadingSubmission, setUploadingSubmission] = useState(false);
 
   // Form
   const [judulAssignment, setJudulAssignment] = useState('');
@@ -90,6 +93,44 @@ function AssignmentTaskIfAGroupProject() {
       day: 'numeric', month: 'long', year: 'numeric',
       hour: '2-digit', minute: '2-digit'
     });
+  };
+
+  const fetchSubmissions = async () => {
+    if (!groupId) return;
+    try {
+      const res = await fetch(`http://localhost:5000/api/submissions/${groupId}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      });
+      const data = await res.json();
+      setSubmissions(data);
+    } catch (err) {
+      console.error('Gagal ambil submissions:', err);
+    }
+  };
+
+  useEffect(() => {
+    fetchSubmissions();
+  }, [groupId]);
+
+  const handleUploadSubmission = async () => {
+    if (!submissionFile) return;
+    setUploadingSubmission(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', submissionFile);
+      const res = await fetch(`http://localhost:5000/api/submissions/${groupId}`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        body: formData,
+      });
+      if (!res.ok) throw new Error('Gagal upload');
+      setSubmissionFile(null);
+      fetchSubmissions(); // refresh list
+    } catch (err) {
+      console.error('Upload gagal:', err);
+    } finally {
+      setUploadingSubmission(false);
+    }
   };
 
   const getNama = (userId) => {
@@ -153,6 +194,18 @@ function AssignmentTaskIfAGroupProject() {
       setError(err.message);
     } finally {
       setLoadingCreate(false);
+    }
+  };
+
+  const handleDeleteSubmission = async (id) => {
+    try {
+      await fetch(`http://localhost:5000/api/submissions/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      });
+      fetchSubmissions();
+    } catch (err) {
+      console.error('Gagal hapus:', err);
     }
   };
 
@@ -349,6 +402,73 @@ function AssignmentTaskIfAGroupProject() {
                 </button>
 
               </div>
+            </div>
+
+            {/* SUBMISSION */}
+            <div className="submission-board">
+              <h3 className="box-title">Submission</h3>
+
+              {/* Upload */}
+              <div style={{ display: 'flex', gap: '10px', alignItems: 'center', marginBottom: '14px' }}>
+                <input
+                  type="file"
+                  onChange={(e) => setSubmissionFile(e.target.files[0])}
+                  style={{ fontSize: '0.82rem' }}
+                />
+                <button
+                  onClick={handleUploadSubmission}
+                  disabled={!submissionFile || uploadingSubmission}
+                  style={{
+                    padding: '6px 16px', borderRadius: '10px', border: 'none',
+                    background: '#6366f1', color: 'white', cursor: 'pointer',
+                    fontSize: '0.82rem', whiteSpace: 'nowrap'
+                  }}
+                >
+                  {uploadingSubmission ? 'Uploading...' : 'Upload'}
+                </button>
+              </div>
+
+              {/* List file */}
+              {submissions.length === 0 && (
+                <p style={{ color: '#aaa', fontSize: '0.85rem' }}>Belum ada file yang diupload.</p>
+              )}
+              {submissions.map(s => (
+                <div key={s.id} style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                  padding: '8px 12px', borderRadius: '8px', background: '#f5f5f5',
+                  border: '1px solid #ddd', marginBottom: '8px'
+                }}>
+                  <div>
+                    <p style={{ fontWeight: '600', fontSize: '0.88rem', margin: 0 }}>{s.nama_file}</p>
+                    <p style={{ fontSize: '0.75rem', color: '#888', margin: 0 }}>
+                      oleh {s.nama_user} · {new Date(s.createdAt).toLocaleString('id-ID')}
+                    </p>
+                  </div>
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <a
+                      href={`http://localhost:5000${s.path_file}`}
+                      download={s.nama_file}
+                      style={{
+                        padding: '4px 12px', borderRadius: '8px', background: '#22c55e',
+                        color: 'white', fontSize: '0.78rem', textDecoration: 'none'
+                      }}
+                    >
+                      Download
+                    </a>
+                    {String(s.user_id) === String(user?.id) && (
+                      <button
+                        onClick={() => handleDeleteSubmission(s.id)}
+                        style={{
+                          padding: '4px 10px', borderRadius: '8px', border: '1px solid #ef4444',
+                          color: '#ef4444', background: 'transparent', cursor: 'pointer', fontSize: '0.78rem'
+                        }}
+                      >
+                        Hapus
+                      </button>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

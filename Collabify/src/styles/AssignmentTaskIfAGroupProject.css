@@ -353,6 +353,20 @@
   border: 1px solid #CDC9C6;
   padding: 16px 20px;
   overflow-y: auto;
+  height: 220px;
+}
+
+.submission-board {
+  max-height: 140px;
+  overflow-y: auto;
+
+  background: white;
+  border: 1px solid #CDC9C6;
+  border-radius: 8px;
+  padding: 16px 20px;
+
+  margin-left: 500px;
+  margin-top: -140px;
 }
 
 .box-title {
