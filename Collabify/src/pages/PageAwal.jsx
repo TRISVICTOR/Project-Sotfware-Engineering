@@ -23,9 +23,9 @@ function PageAwal() {
 
         <ul className="menu">
           <li>Home</li>
-          <li>About Us</li>
-          <li>Features</li>
-          <li>Contact</li>
+          <li onClick={() => navigate("/information")} style={{ cursor: 'pointer' }}>About Us</li>
+          <li onClick={() => navigate("/information")} style={{ cursor: 'pointer' }}>Features</li>
+          <li onClick={() => navigate("/information")} style={{ cursor: 'pointer' }}>Contact</li>
         </ul>
 
         <div className="auth-buttons">

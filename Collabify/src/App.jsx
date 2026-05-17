@@ -12,11 +12,12 @@ import AssignmentGroup from "./pages/AssignmentTaskIfAGroupProject"
 import ProfilePage from "./pages/ProfilePage"
 import ChangePassword from "./pages/ChangePasswordPage"
 import ChangeUsernameEmail from "./pages/ChangeUsernameEmailPage"
+import InformationPage from "./pages/InformationPage"
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth()
   if (loading) return <div>Loading...</div>
-  if (!user) return <Navigate to="/login" />
+  if (!user) return <Navigate to="/" />
   return children
 }
 
@@ -36,6 +37,7 @@ function App() {
         <Route path="/" element={<PageAwal />} />
         <Route path="/login" element={<GuestRoute><Login /></GuestRoute>} />
         <Route path="/signup" element={<GuestRoute><Signup /></GuestRoute>} />
+        <Route path="/information" element={<InformationPage />} />
 
         {/* Halaman SUDAH login */}
         <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />

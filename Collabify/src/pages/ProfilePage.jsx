@@ -41,7 +41,7 @@ function ProfilePage() {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate('/');
   };
 
   // Simpan perubahan email
