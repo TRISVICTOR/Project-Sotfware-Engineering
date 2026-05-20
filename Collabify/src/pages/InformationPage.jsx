@@ -48,28 +48,28 @@ function InformationPage() {
         <section className="info-section">
           <h1 className="info-title">About Us</h1>
           <p className="info-desc">
-            Collabify adalah platform manajemen tugas yang dirancang untuk membantu individu dan tim dalam mengelola deadline dengan lebih efektif. Kami percaya bahwa tidak ada tugas yang terlewat jika ada sistem yang tepat untuk mengingatkanmu.
+            Collabify is a task management platform designed to help individuals and teams manage deadlines more effectively. We believe that no task is missed if there is a proper system to remind you.
           </p>
           <p className="info-desc">
-            Dengan Collabify, kamu bisa memantau semua tugasmu dalam satu tempat, mulai dari tugas pribadi hingga tugas kelompok bersama teman-temanmu. Kami hadir untuk memastikan kamu selalu selangkah lebih maju dari deadline.
+            With Collabify, you can monitor all your tasks in one place, from personal tasks to group tasks with your friends. We are here to make sure you are always one step ahead of the deadline.
           </p>
           <p className="info-desc">
-            Collabify lahir dari keresahan nyata, betapa seringnya tugas terlupakan bukan karena malas, tapi karena tidak ada sistem yang mengingatkan tepat waktu. Kami membangun Collabify sebagai solusi yang sederhana namun powerful untuk masalah itu. Berawal dari kebutuhan mahasiswa dan pelajar yang sering kewalahan menghadapi banyaknya tugas, Collabify kini hadir sebagai teman setia dalam setiap perjalanan belajarmu.
+            Collabify was born out of a real concern, how often tasks are forgotten not because of laziness, but because there is no system that reminds on time. We built Collabify as a simple yet powerful solution to that problem. Starting from the needs of students who are often overwhelmed by the many tasks, Collabify now comes as a faithful companion in every part of your learning journey.
           </p>
           <p className="info-desc">
-            Di Collabify, kamu tidak hanya bisa membuat tugas pribadi, tapi juga berkolaborasi dalam group task bersama teman-temanmu. Setiap anggota tim bisa mendapatkan assignment masing-masing, memantau progress, dan mengumpulkan hasil kerja langsung di platform. Tidak perlu lagi bolak-balik aplikasi chat hanya untuk koordinasi tugas kelompok, semuanya sudah tersedia di satu tempat.
+            At Collabify, you can not only create personal tasks, but also collaborate on group tasks with your friends. Each team member can get their own assignments, monitor progress, and submit their work directly on the platform. No more going back and forth between chat applications just to coordinate group tasks; everything is available in one place.
           </p>
           <p className="info-desc">
-            Sistem notifikasi alarm kami akan secara otomatis mengingatkanmu saat deadline tinggal 24 jam dan 12 jam lagi, sehingga kamu selalu punya waktu untuk mempersiapkan diri sebelum terlambat. Dengan prioritas tugas yang otomatis diurutkan berdasarkan kedekatan deadline, kamu bisa langsung fokus pada hal yang paling mendesak tanpa perlu berpikir panjang.
+            Our alarm notification system will automatically remind you when your deadline is just 24 hours and 12 hours away, ensuring you always have time to prepare before missing the deadline. With task priorities automatically sorted based on proximity to the deadline, you can focus directly on the most urgent tasks without having to think too much.
           </p>
           <p className="info-desc">
-            Kami juga memahami bahwa kolaborasi yang baik membutuhkan komunikasi yang jelas. Oleh karena itu, fitur group task di Collabify memungkinkan kamu untuk meng-assign tugas ke anggota tim tertentu, melampirkan file referensi, serta menerima dan mengunduh hasil submission dari setiap anggota, semua dalam satu halaman yang rapi dan mudah dipahami.
+            We also understand that good collaboration requires clear communication. That's why the group task feature in Collabify allows you to assign tasks to specific team members, attach reference files, and receive and download submission results from each member, all in one neat and easy-to-understand page.
           </p>
           <p className="info-desc">
-            Keamanan dan kemudahan akses adalah prioritas kami. Dengan sistem login yang aman dan manajemen akun yang fleksibel, kamu bisa mengubah username, email, maupun password kapan saja sesuai kebutuhan. Data tugasmu tersimpan dengan aman dan bisa diakses dari mana saja.
+            Security and ease of access are our top priorities. With a secure login system and flexible account management, you can change your username, email, or password at any time according to your needs. Your tasks are stored securely and can be accessed from anywhere.
           </p>
           <p className="info-desc">
-            Kami berkomitmen untuk terus berkembang dan menghadirkan fitur-fitur baru yang membantu produktivitasmu. Bergabunglah bersama ribuan pengguna yang sudah merasakan manfaat Collabify dan mulailah kelola tugasmu dengan lebih cerdas hari ini. Karena di Collabify, tidak ada deadline yang terlewat.
+            We are committed to continuous improvement and bringing you new features that enhance your productivity. Join thousands of users who have already experienced the benefits of Collabify and start managing your tasks more intelligently today. Because at Collabify, there are no missed deadlines.
           </p>
         </section>
 
@@ -79,39 +79,39 @@ function InformationPage() {
             <div className="feature-card">
               <span className="feature-icon">🔔</span>
               <h3>Alarm Deadline</h3>
-              <p>Notifikasi otomatis berbunyi saat deadline tugasmu tinggal 24 jam dan 12 jam lagi. Tidak ada lagi alasan lupa!</p>
+              <p>Automatic notifications sound when your assignment deadline is 24 hours and 12 hours away. No more excuses for forgetting!</p>
             </div>
             <div className="feature-card">
               <span className="feature-icon">📋</span>
               <h3>Task Priority</h3>
-              <p>Tugas ditampilkan berdasarkan prioritas secara otomatis. Semakin dekat deadline, semakin tinggi prioritasnya.</p>
+              <p>Tasks are displayed based on priority automatically. The closer the deadline, the higher the priority.</p>
             </div>
             <div className="feature-card">
               <span className="feature-icon">👥</span>
               <h3>Group Task</h3>
-              <p>Buat tugas kelompok dan assign anggota tim sesuai tanggung jawab masing-masing, lengkap dengan deadline per tugas.</p>
+              <p>Assign group tasks to specific team members and manage deadlines for each task.</p>
             </div>
             <div className="feature-card">
               <span className="feature-icon">📎</span>
               <h3>File Submission</h3>
-              <p>Upload dan download hasil pengerjaan tugas kelompok langsung di dalam platform. Semua file tersimpan rapi.</p>
+              <p>Upload and download group task submission results directly within the platform. All files are stored neatly.</p>
             </div>
             <div className="feature-card">
               <span className="feature-icon">🤝</span>
               <h3>Add Friend</h3>
-              <p>Tambahkan teman dan ajak mereka berkolaborasi dalam group task. Kerja tim jadi lebih terstruktur.</p>
+              <p>Add friends and invite them to collaborate on group tasks. Teamwork becomes more structured.</p>
             </div>
             <div className="feature-card">
               <span className="feature-icon">👤</span>
               <h3>Personal & Group Task</h3>
-              <p>Kelola tugas pribadi dan tugas kelompok dalam satu dashboard yang sama. Semua terorganisir dengan baik.</p>
+              <p>Manage personal and group tasks in the same dashboard. Everything is well-organized.</p>
             </div>
           </div>
         </section>
 
         <section className="info-section Contact-section">
           <h1 className="info-title">Contact</h1>
-          <p className="info-desc">Punya pertanyaan atau saran? Jangan ragu untuk menghubungi tim Collabify.</p>
+          <p className="info-desc">Have questions or suggestions? Don't hesitate to contact the Collabify team.</p>
           <div className="contact-list">
 
             <div className="contact-item">

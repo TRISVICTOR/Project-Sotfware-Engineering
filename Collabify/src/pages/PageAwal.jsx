@@ -49,7 +49,9 @@ function PageAwal() {
             <button className="start" onClick={() => navigate("/signup")}>
               Get Started
             </button>
-            <button className="learn">Learn More</button>
+            <button className="learn" onClick={() => navigate("/information")}>
+              Learn More
+            </button>
           </div>
         </div>
 
