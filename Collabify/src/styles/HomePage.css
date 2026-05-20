@@ -105,6 +105,30 @@
   border: #CDC9C6 solid 1px;
 }
 
+.calendar .day.task-personal {
+  background: #22c55e;
+  color: white;
+  font-weight: 600;
+  border-radius: 50%;
+}
+
+.calendar .day.task-group {
+  background: #a855f7;
+  color: white;
+  font-weight: 600;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.calendar .day.task-group:hover {
+  background: #9333ea;
+}
+
+.calendar .day.today.task-personal,
+.calendar .day.today.task-group {
+  outline: 2px solid #3b82f6;
+}
+
 /* ================= SIDEBAR ================= */
 
 .sidebar{
@@ -374,15 +398,6 @@
   background: #378add;
   color: #fff;
   font-weight: 500;
-}
-
-.day.today:hover{
-  background: #2a72c3;
-}
-
-.day.selected{
-  background: #e6f1fb;
-  color: #185fa5;
 }
 
 /* Time */

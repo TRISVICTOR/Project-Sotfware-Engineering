@@ -20,12 +20,16 @@ function HomePage() {
   const { user, logout } = useAuth();
 
   const [tasks, setTasks] = useState([]);
+  const [allTasks, setAllTasks] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
     getMyTasks()
-      .then(data => setTasks(data))
+      .then(data => {
+        setAllTasks(data);
+        setTasks(data.slice(0, 3));
+      })
       .catch(err => console.error('Gagal ambil task:', err))
       .finally(() => setLoading(false));
   }, [location]);
@@ -152,7 +156,7 @@ function HomePage() {
               {/* CALENDAR */}
               <div className="calendar-box">
                 <h2 className="calendar-title">Calendar</h2>
-                <Calendar />
+                <Calendar tasks={allTasks} />
               </div>
 
             </div>
