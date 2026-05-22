@@ -1,7 +1,7 @@
 import React from "react"
 import "../styles/InformationPage.css"
-import { useNavigate } from "react-router-dom"
 import { useEffect, useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom"
 
 import logo from "../assets/LOGOWB.png"
 import whatapp from "../assets/Whatapp.png"
@@ -12,9 +12,26 @@ function InformationPage() {
   const navigate = useNavigate()
   const contentRef = useRef(null);
 
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
   useEffect(() => {
     contentRef.current?.scrollTo(0,0);
   }, []);
+
+  useEffect(() => {
+    if (location.hash) {
+      // Tunggu render selesai dulu
+      setTimeout(() => {
+        const el = document.getElementById(location.hash.replace("#", ""));
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    } else {
+      contentRef.current?.scrollTo(0, 0);
+    }
+  }, [location]);
 
   return (
     <div className="page-containerInformation">
@@ -27,9 +44,9 @@ function InformationPage() {
 
         <ul className="menuInformation">
           <li onClick={() => navigate("/")} style={{ cursor: 'pointer' }}>Home</li>
-          <li onClick={() => navigate("/information")} style={{ cursor: 'pointer' }}>About Us</li>
-          <li onClick={() => navigate("/information")} style={{ cursor: 'pointer' }}>Features</li>
-          <li onClick={() => navigate("/information")} style={{ cursor: 'pointer' }}>Contact</li>
+          <li onClick={() => scrollToSection("about")} style={{ cursor: 'pointer' }}>About Us</li>
+          <li onClick={() => scrollToSection("features")} style={{ cursor: 'pointer' }}>Features</li>
+          <li onClick={() => scrollToSection("contact")} style={{ cursor: 'pointer' }}>Contact</li>
         </ul>
 
         <div className="auth-buttonsInformation">
@@ -45,7 +62,7 @@ function InformationPage() {
 
       <div className="ApplicationInformation" ref={contentRef}>
 
-        <section className="info-section">
+        <section className="info-section" id="about">
           <h1 className="info-title">About Us</h1>
           <p className="info-desc">
             Collabify is a task management platform designed to help individuals and teams manage deadlines more effectively. We believe that no task is missed if there is a proper system to remind you.
@@ -73,7 +90,7 @@ function InformationPage() {
           </p>
         </section>
 
-        <section className="info-section feature-section">
+        <section className="info-section feature-section" id="features">
           <h1 className="info-title">Features</h1>
           <div className="feature-grid">
             <div className="feature-card">
@@ -109,7 +126,7 @@ function InformationPage() {
           </div>
         </section>
 
-        <section className="info-section Contact-section">
+        <section className="info-section Contact-section" id="contact">
           <h1 className="info-title">Contact</h1>
           <p className="info-desc">Have questions or suggestions? Don't hesitate to contact the Collabify team.</p>
           <div className="contact-list">

@@ -12,6 +12,10 @@ import plant from "../assets/TanamanPageawal.png"
 function PageAwal() {
   const navigate = useNavigate()
 
+  const navigateToSection = (hash) => {
+    navigate(`/information#${hash}`);
+  }
+
   return (
     <div className="page-container">
 
@@ -22,10 +26,10 @@ function PageAwal() {
         </div>
 
         <ul className="menu">
-          <li>Home</li>
-          <li onClick={() => navigate("/information")} style={{ cursor: 'pointer' }}>About Us</li>
-          <li onClick={() => navigate("/information")} style={{ cursor: 'pointer' }}>Features</li>
-          <li onClick={() => navigate("/information")} style={{ cursor: 'pointer' }}>Contact</li>
+          <li onClick={() => navigate("/")} style={{ cursor: 'pointer' }}>Home</li>
+          <li onClick={() => navigateToSection("about")} style={{ cursor: 'pointer' }}>About Us</li>
+          <li onClick={() => navigateToSection("features")} style={{ cursor: 'pointer' }}>Features</li>
+          <li onClick={() => navigateToSection("contact")} style={{ cursor: 'pointer' }}>Contact</li>
         </ul>
 
         <div className="auth-buttons">
@@ -49,7 +53,7 @@ function PageAwal() {
             <button className="start" onClick={() => navigate("/signup")}>
               Get Started
             </button>
-            <button className="learn" onClick={() => navigate("/information")}>
+            <button className="learn" onClick={() => navigateToSection("about")}>
               Learn More
             </button>
           </div>
