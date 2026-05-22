@@ -5,19 +5,19 @@ const { Op } = require('sequelize');
 
 const startDeadlineChecker = () => {
 
-  // ─── Notifikasi 24 & 12 jam (cek setiap 1 menit) ───────────────
-  cron.schedule('* * * * *', async () => {
+  // ─── Notifikasi 24 & 12 jam (cek setiap 1 DETIK) ───────────────
+  cron.schedule('* * * * * *', async () => { // ← 6 kolom = setiap detik
     const sekarang = new Date();
 
-    // 24 jam: window ±1 menit
-    const jam24Mulai = new Date(sekarang.getTime() + (23 * 60 + 59) * 60 * 1000);
-    const jam24Akhir = new Date(sekarang.getTime() + (24 * 60 + 1) * 60 * 1000);
+    // 24 jam: window ±0.5 detik
+    const jam24Mulai = new Date(sekarang.getTime() + 24 * 60 * 60 * 1000 - 500);
+    const jam24Akhir = new Date(sekarang.getTime() + 24 * 60 * 60 * 1000 + 500);
     const tasks24Jam = await Task.findAll({
       where: { deadline: { [Op.between]: [jam24Mulai, jam24Akhir] }, status: { [Op.ne]: 'done' } },
     });
     for (const task of tasks24Jam) {
       const sudahAda = await Notification.findOne({
-        where: { task_id: task.id, tipe: 'deadline_24jam' }, // ✅ tanpa batasan waktu
+        where: { task_id: task.id, tipe: 'deadline_24jam' },
       });
       if (!sudahAda) {
         await Notification.create({
@@ -29,15 +29,15 @@ const startDeadlineChecker = () => {
       }
     }
 
-    // 12 jam: window ±1 menit
-    const jam12Mulai = new Date(sekarang.getTime() + (11 * 60 + 59) * 60 * 1000);
-    const jam12Akhir = new Date(sekarang.getTime() + (12 * 60 + 1) * 60 * 1000);
+    // 12 jam: window ±0.5 detik
+    const jam12Mulai = new Date(sekarang.getTime() + 12 * 60 * 60 * 1000 - 500);
+    const jam12Akhir = new Date(sekarang.getTime() + 12 * 60 * 60 * 1000 + 500);
     const tasks12Jam = await Task.findAll({
       where: { deadline: { [Op.between]: [jam12Mulai, jam12Akhir] }, status: { [Op.ne]: 'done' } },
     });
     for (const task of tasks12Jam) {
       const sudahAda = await Notification.findOne({
-        where: { task_id: task.id, tipe: 'deadline_12jam' }, // ✅ tanpa batasan waktu
+        where: { task_id: task.id, tipe: 'deadline_12jam' },
       });
       if (!sudahAda) {
         await Notification.create({
@@ -50,7 +50,7 @@ const startDeadlineChecker = () => {
     }
   });
 
-  // ─── AUTO HAPUS task expired (cek setiap 10 detik) ─────────────
+  // ─── AUTO HAPUS task expired (tetap setiap 10 detik) ─────────────
   cron.schedule('*/10 * * * * *', async () => {
     const sekarang = new Date();
     const tasksExpired = await Task.findAll({
@@ -63,7 +63,7 @@ const startDeadlineChecker = () => {
     }
   });
 
-  console.log('✅ Deadline checker aktif');
+  console.log('✅ Deadline checker aktif (cek setiap 1 detik)');
 };
 
 module.exports = startDeadlineChecker;
