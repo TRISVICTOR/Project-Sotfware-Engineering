@@ -63,7 +63,7 @@ const startDeadlineChecker = () => {
     }
   });
 
-  console.log('✅ Deadline checker aktif (cek setiap 1 detik)');
+  console.log('✅ Deadline checker');
 };
 
 module.exports = startDeadlineChecker;

@@ -24,7 +24,7 @@ app.use('/api/upload', require('./src/routes/upload'));
 app.use('/api/submissions', require('./src/routes/submissions'));
 
 // Koneksi Database
-sequelize.sync({ alter: true })
+sequelize.sync({ force: false })  // ✅ Ganti alter: true dengan force: false
   .then(() => {
     console.log('✅ MySQL terhubung & tabel siap!');
     app.listen(process.env.PORT, () => {
