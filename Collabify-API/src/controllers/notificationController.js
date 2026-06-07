@@ -1,6 +1,5 @@
 const Notification = require('../models/Notification');
 
-// Ambil semua notifikasi milik user
 exports.getNotifications = async (req, res) => {
   try {
     const notifs = await Notification.findAll({
@@ -13,7 +12,6 @@ exports.getNotifications = async (req, res) => {
   }
 };
 
-// Tandai 1 notifikasi sudah dibaca
 exports.markAsRead = async (req, res) => {
   try {
     await Notification.update(
@@ -26,7 +24,6 @@ exports.markAsRead = async (req, res) => {
   }
 };
 
-// Tandai semua notifikasi sudah dibaca
 exports.markAllAsRead = async (req, res) => {
   try {
     await Notification.update(

@@ -24,7 +24,6 @@ function PageFriend() {
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
 
-  // Ambil semua teman dari API
   useEffect(() => {
     getFriends()
       .then(data => setFriends(data))
@@ -32,7 +31,6 @@ function PageFriend() {
       .finally(() => setLoading(false));
   }, []);
 
-  // Filter teman berdasarkan pencarian
   const filteredFriends = friends.filter(f =>
     f.nama?.toLowerCase().includes(search.toLowerCase())
   );

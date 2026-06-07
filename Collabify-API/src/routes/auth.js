@@ -7,7 +7,6 @@ router.post('/register', register);
 router.post('/login', login);
 router.get('/profile', authMiddleware, getProfile);
 
-// Tambahkan di bawah router.get('/profile', ...)
 router.get('/search', authMiddleware, async (req, res) => {
   try {
     const User = require('../models/User');
@@ -23,7 +22,6 @@ router.get('/search', authMiddleware, async (req, res) => {
   }
 });
 
-// Tambah di bawah router.get('/search', ...)
 router.put('/update', authMiddleware, async (req, res) => {
   try {
     const User = require('../models/User');
@@ -33,20 +31,17 @@ router.put('/update', authMiddleware, async (req, res) => {
     const user = await User.findByPk(req.user.id);
     if (!user) return res.status(404).json({ message: 'User tidak ditemukan.' });
 
-    // Verifikasi password lama dulu
     const isMatch = await bcrypt.compare(passwordLama, user.password);
     if (!isMatch) return res.status(400).json({ message: 'Password lama salah!' });
 
     const updateData = {};
 
-    // Update email jika diisi
     if (email && email !== user.email) {
       const emailExist = await User.findOne({ where: { email } });
       if (emailExist) return res.status(400).json({ message: 'Email sudah dipakai akun lain!' });
       updateData.email = email;
     }
 
-    // Update password jika diisi
     if (password) {
       if (password.length < 6) return res.status(400).json({ message: 'Password baru minimal 6 karakter!' });
       updateData.password = await bcrypt.hash(password, 10);
@@ -61,7 +56,6 @@ router.put('/update', authMiddleware, async (req, res) => {
   }
 });
 
-// Ambil user acak (selain diri sendiri)
 router.get('/users/random', authMiddleware, async (req, res) => {
   try {
     const User = require('../models/User');

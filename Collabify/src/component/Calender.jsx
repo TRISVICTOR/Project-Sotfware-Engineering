@@ -48,7 +48,6 @@ export default function Calendar({ tasks = [] }) {
     month === selectedDate.getMonth() &&
     year === selectedDate.getFullYear();
 
-  // Cari task yang deadline di tanggal tertentu
   const getTaskOnDate = (d) => {
     return tasks.find(task => {
       const deadline = new Date(task.deadline);
@@ -79,7 +78,6 @@ export default function Calendar({ tasks = [] }) {
   const handleDayClick = (d) => {
     setSelectedDate(new Date(year, month, d));
     const task = getTaskOnDate(d);
-    // Kalau task group dan punya group_id → arahkan ke group project
     if (task && task.tipe === 'group' && task.group_id) {
       navigate('/groupproject', { state: { groupId: task.group_id } });
     }

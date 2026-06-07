@@ -13,7 +13,7 @@ export const updateTask = (id, data) =>
   request(`/tasks/${id}`, 'PUT', data);
 
 export const deleteTask = (id) =>
-  request(`/tasks/${id}`, 'DELETE');  // ✅ ini saja yang dipakai
+  request(`/tasks/${id}`, 'DELETE'); 
 
 export const uploadFileLampiran = async (taskId, file) => {
   const token = localStorage.getItem('token');

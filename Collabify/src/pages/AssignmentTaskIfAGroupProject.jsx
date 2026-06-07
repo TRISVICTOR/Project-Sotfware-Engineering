@@ -37,7 +37,6 @@ function AssignmentTaskIfAGroupProject() {
   const [submissionFile, setSubmissionFile] = useState(null);
   const [uploadingSubmission, setUploadingSubmission] = useState(false);
 
-  // Form
   const [judulAssignment, setJudulAssignment] = useState('');
   const [assignedTo, setAssignedTo] = useState('');
   const [deadlineAssignment, setDeadlineAssignment] = useState('');
@@ -74,7 +73,6 @@ function AssignmentTaskIfAGroupProject() {
           t => t.judul !== groupData.group.nama_group
         );
 
-        // ← sorting di sini
         assignmentSaja.sort((a, b) => {
           const aUrut = String(a.assigned_to) === String(user?.id) ? 0 : 1;
           const bUrut = String(b.assigned_to) === String(user?.id) ? 0 : 1;
@@ -125,7 +123,7 @@ function AssignmentTaskIfAGroupProject() {
       });
       if (!res.ok) throw new Error('Gagal upload');
       setSubmissionFile(null);
-      fetchSubmissions(); // refresh list
+      fetchSubmissions();
     } catch (err) {
       console.error('Upload gagal:', err);
     } finally {
@@ -170,7 +168,6 @@ function AssignmentTaskIfAGroupProject() {
         await uploadFileLampiran(newTask.task.id, selectedFile);
       }
 
-      // Refresh dengan filter yang sama
       const updatedGroup = await getGroupById(groupId);
       const assignmentSaja = updatedGroup.tasks.filter(
         t => t.judul !== group?.nama_group
@@ -184,7 +181,6 @@ function AssignmentTaskIfAGroupProject() {
 
       setTasks(assignmentSaja);
 
-      // Reset form
       setJudulAssignment('');
       setAssignedTo('');
       setDeadlineAssignment('');

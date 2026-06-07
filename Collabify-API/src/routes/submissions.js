@@ -14,7 +14,6 @@ const upload = multer({ storage });
 
 router.use(authMiddleware);
 
-// Upload submission
 router.post('/:groupId', upload.single('file'), async (req, res) => {
   try {
     const submission = await Submission.create({
@@ -29,7 +28,6 @@ router.post('/:groupId', upload.single('file'), async (req, res) => {
   }
 });
 
-// Ambil semua submission milik group
 router.get('/:groupId', async (req, res) => {
   try {
     const submissions = await Submission.findAll({
@@ -37,7 +35,6 @@ router.get('/:groupId', async (req, res) => {
       order: [['createdAt', 'DESC']],
     });
 
-    // Ambil nama user tiap submission
     const result = await Promise.all(submissions.map(async (s) => {
       const user = await User.findByPk(s.user_id, { attributes: ['nama'] });
       return { ...s.toJSON(), nama_user: user?.nama || `User #${s.user_id}` };
@@ -49,7 +46,6 @@ router.get('/:groupId', async (req, res) => {
   }
 });
 
-// Hapus submission (hanya milik sendiri)
 router.delete('/:id', async (req, res) => {
   try {
     const submission = await Submission.findByPk(req.params.id);

@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 require('dotenv').config();
 
-// Register
 exports.register = async (req, res) => {
   try {
     const { nama, email, password } = req.body;
@@ -20,7 +19,6 @@ exports.register = async (req, res) => {
   }
 };
 
-// Login
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -43,7 +41,6 @@ exports.login = async (req, res) => {
   }
 };
 
-// Ambil profil sendiri
 exports.getProfile = async (req, res) => {
   try {
     const user = await User.findByPk(req.user.id, {

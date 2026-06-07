@@ -5,11 +5,9 @@ const { Op } = require('sequelize');
 
 const startDeadlineChecker = () => {
 
-  // ─── Notifikasi 24 & 12 jam (cek setiap 1 DETIK) ───────────────
-  cron.schedule('* * * * * *', async () => { // ← 6 kolom = setiap detik
+  cron.schedule('* * * * * *', async () => {
     const sekarang = new Date();
 
-    // 24 jam: window ±0.5 detik
     const jam24Mulai = new Date(sekarang.getTime() + 24 * 60 * 60 * 1000 - 500);
     const jam24Akhir = new Date(sekarang.getTime() + 24 * 60 * 60 * 1000 + 500);
     const tasks24Jam = await Task.findAll({
@@ -29,7 +27,6 @@ const startDeadlineChecker = () => {
       }
     }
 
-    // 12 jam: window ±0.5 detik
     const jam12Mulai = new Date(sekarang.getTime() + 12 * 60 * 60 * 1000 - 500);
     const jam12Akhir = new Date(sekarang.getTime() + 12 * 60 * 60 * 1000 + 500);
     const tasks12Jam = await Task.findAll({
@@ -50,7 +47,6 @@ const startDeadlineChecker = () => {
     }
   });
 
-  // ─── AUTO HAPUS task expired (tetap setiap 10 detik) ─────────────
   cron.schedule('*/10 * * * * *', async () => {
     const sekarang = new Date();
     const tasksExpired = await Task.findAll({

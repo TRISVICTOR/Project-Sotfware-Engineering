@@ -20,16 +20,13 @@ function ProfilePage() {
   const location = useLocation();
   const { user, logout } = useAuth();
 
-  // Edit name
   const [editNama, setEditNama] = useState(false);
   const [namaBaru, setNamaBaru] = useState('');
 
-  // Edit email
   const [editEmail, setEditEmail] = useState(false);
   const [emailBaru, setEmailBaru] = useState('');
   const [passwordVerifEmail, setPasswordVerifEmail] = useState('');
 
-  // Edit password
   const [editPassword, setEditPassword] = useState(false);
   const [passwordLama, setPasswordLama] = useState('');
   const [passwordBaru, setPasswordBaru] = useState('');
@@ -44,7 +41,6 @@ function ProfilePage() {
     navigate('/');
   };
 
-  // Simpan perubahan email
   const handleSimpanEmail = async () => {
     setError(''); setSuccess('');
     if (!emailBaru.trim()) { setError('Email baru wajib diisi!'); return; }

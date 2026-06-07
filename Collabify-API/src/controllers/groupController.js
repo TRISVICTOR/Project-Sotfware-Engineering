@@ -2,7 +2,6 @@ const { GroupProject, GroupMember } = require('../models/GroupProject');
 const Task = require('../models/Task');
 const User = require('../models/User');
 
-// Buat group project baru
 exports.createGroup = async (req, res) => {
   try {
     const { nama_group, deskripsi } = req.body;
@@ -12,7 +11,6 @@ exports.createGroup = async (req, res) => {
       created_by: req.user.id,
     });
 
-    // Pembuat otomatis jadi owner
     await GroupMember.create({ group_id: group.id, user_id: req.user.id, role: 'owner' });
 
     res.status(201).json({ message: 'Group berhasil dibuat!', group });
@@ -21,7 +19,6 @@ exports.createGroup = async (req, res) => {
   }
 };
 
-// Ambil semua group milik user
 exports.getMyGroups = async (req, res) => {
   try {
     const memberships = await GroupMember.findAll({ where: { user_id: req.user.id } });
@@ -33,8 +30,6 @@ exports.getMyGroups = async (req, res) => {
   }
 };
 
-// Detail 1 group beserta task & anggotanya
-// groupController.js
 exports.getGroupById = async (req, res) => {
   try {
     const group = await GroupProject.findByPk(req.params.id);
@@ -43,7 +38,6 @@ exports.getGroupById = async (req, res) => {
     const members = await GroupMember.findAll({ where: { group_id: group.id } });
     const tasks = await Task.findAll({ where: { group_id: group.id } });
 
-    // ✅ Tambahkan nama & email tiap member
     const membersWithDetail = await Promise.all(
       members.map(async (m) => {
         const user = await User.findByPk(m.user_id, {
@@ -59,18 +53,15 @@ exports.getGroupById = async (req, res) => {
   }
 };
 
-// Tambah anggota ke group
 exports.addMember = async (req, res) => {
   try {
     const { user_id } = req.body;
     const group_id = req.params.id;
 
-    // Cek duplikat dengan lebih ketat
     const sudahAda = await GroupMember.findOne({
       where: { group_id, user_id }
     });
     if (sudahAda) {
-      // Kembalikan sukses saja agar frontend tidak error
       return res.json({ message: 'User sudah ada di group.' });
     }
 
@@ -81,7 +72,6 @@ exports.addMember = async (req, res) => {
   }
 };
 
-// Hapus anggota dari group
 exports.removeMember = async (req, res) => {
   try {
     await GroupMember.destroy({
@@ -97,13 +87,10 @@ exports.deleteGroup = async (req, res) => {
   try {
     const group_id = req.params.id;
     
-    // ✅ Hapus SEMUA task dalam group (termasuk assignment milik member lain)
     await Task.destroy({ where: { group_id } });
     
-    // Hapus semua member
     await GroupMember.destroy({ where: { group_id } });
     
-    // Hapus group
     await GroupProject.destroy({ where: { id: group_id } });
     
     res.json({ message: 'Group dan semua task dihapus.' });

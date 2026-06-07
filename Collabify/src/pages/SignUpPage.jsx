@@ -112,7 +112,6 @@ function SignUpPage() {
               value={confirmPassword}
               onChange={(e) => {
                 setConfirmPassword(e.target.value);
-                // Cek real-time saat diketik
                 if (e.target.value !== password) {
                   setConfirmError('Password tidak sama!');
                 } else {

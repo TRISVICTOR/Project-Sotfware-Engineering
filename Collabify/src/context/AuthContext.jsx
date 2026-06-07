@@ -7,7 +7,6 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Cek apakah user sudah login saat app dibuka
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -20,13 +19,11 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  // Simpan token & data user setelah login
   const login = (token, userData) => {
     localStorage.setItem('token', token);
     setUser(userData);
   };
 
-  // Hapus token saat logout
   const logout = () => {
     localStorage.removeItem('token');
     setUser(null);

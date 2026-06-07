@@ -2,7 +2,6 @@ const Task = require('../models/Task');
 const Notification = require('../models/Notification');
 const User = require('../models/User');
 
-// Buat task baru (personal atau group)
 exports.createTask = async (req, res) => {
   try {
     const { judul, deskripsi, tipe, deadline, assigned_to, group_id } = req.body;
@@ -14,7 +13,6 @@ exports.createTask = async (req, res) => {
       group_id: tipe === 'group' ? group_id : null,
     });
 
-    // Kirim notifikasi ke orang yang ditugaskan (jika group)
     if (tipe === 'group' && assigned_to && assigned_to !== req.user.id) {
       await Notification.create({
         user_id: assigned_to,
@@ -30,7 +28,6 @@ exports.createTask = async (req, res) => {
   }
 };
 
-// Ambil semua task milik user (MyTask page)
 exports.getMyTasks = async (req, res) => {
   try {
     const tasks = await Task.findAll({
@@ -43,7 +40,6 @@ exports.getMyTasks = async (req, res) => {
   }
 };
 
-// Ambil 1 task by ID
 exports.getTaskById = async (req, res) => {
   try {
     const task = await Task.findByPk(req.params.id);
@@ -54,7 +50,6 @@ exports.getTaskById = async (req, res) => {
   }
 };
 
-// Update task
 exports.updateTask = async (req, res) => {
   try {
     const task = await Task.findByPk(req.params.id);
@@ -67,7 +62,6 @@ exports.updateTask = async (req, res) => {
   }
 };
 
-// Hapus task
 exports.deleteTask = async (req, res) => {
   try {
     const task = await Task.findByPk(req.params.id);

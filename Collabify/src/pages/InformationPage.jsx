@@ -23,7 +23,7 @@ function InformationPage() {
 
   useEffect(() => {
     if (location.hash) {
-      // Tunggu render selesai dulu
+
       setTimeout(() => {
         const el = document.getElementById(location.hash.replace("#", ""));
         if (el) el.scrollIntoView({ behavior: "smooth" });

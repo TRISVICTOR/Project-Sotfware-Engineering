@@ -7,7 +7,7 @@ const Task = require('../models/Task');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/Tasks/'); // ← huruf T kapital sesuai foldermu
+    cb(null, 'uploads/Tasks/');
   },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}-${file.originalname}`);

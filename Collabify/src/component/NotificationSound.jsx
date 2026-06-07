@@ -18,7 +18,6 @@ function NotificationSound() {
       const unread = data.filter(n => !n.is_read).length;
       setUnreadCount(unread);
 
-      // Putar suara kalau ada notif baru
       if (unread > prevCountRef.current) {
         audioRef.current.currentTime = 0;
         audioRef.current.play().catch(err => console.log('Audio blocked:', err));

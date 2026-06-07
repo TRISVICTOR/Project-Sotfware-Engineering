@@ -22,7 +22,6 @@ function PageMyTask() {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Ambil semua task milik user dari API
   useEffect(() => {
     const fetchTasks = () => {
       getMyTasks()
@@ -37,7 +36,6 @@ function PageMyTask() {
     return () => clearInterval(interval);
   }, []);
 
-  // Format tanggal deadline
   const formatDeadline = (dateStr) => {
     return new Date(dateStr).toLocaleString('id-ID', {
       day: 'numeric', month: 'long', year: 'numeric',
@@ -45,7 +43,6 @@ function PageMyTask() {
     });
   };
 
-  // Hitung prioritas otomatis dari sisa waktu deadline
   const getPriority = (deadline) => {
     const sisaJam = (new Date(deadline) - new Date()) / (1000 * 60 * 60);
     if (sisaJam <= 24)  return { label: 'High Priority',   className: 'highMyTask' };
@@ -53,20 +50,16 @@ function PageMyTask() {
     return               { label: 'Low Priority',    className: 'lowMyTask' };
   };
 
-  // Klik task group → ke halaman group project
-  // Klik task personal → tidak bisa diklik (sesuai permintaanmu)
   const handleTaskClick = (task) => {
     if (task.tipe === 'group' && task.group_id) {
       navigate('/groupproject', { state: { groupId: task.group_id } });
     }
   };
 
-  // ✅ Ubah handleSelesai — terima task object, bukan taskId
   const handleSelesai = async (e, task) => {
     e.stopPropagation();
     try {
       if (task.tipe === 'group' && task.group_id) {
-        // ✅ Cukup deleteGroup — backend hapus semua sekaligus
         await deleteGroup(task.group_id);
         setTasks(prev => prev.filter(t => t.group_id !== task.group_id));
       } else {
@@ -155,7 +148,7 @@ function PageMyTask() {
                     key={task.id}
                     className="task-itemMyTask"
                     onClick={() => handleTaskClick(task)}
-                    style={{ cursor: isGroup ? 'pointer' : 'default' }} // ✅ hapus opacity isDone
+                    style={{ cursor: isGroup ? 'pointer' : 'default' }}
                   >
                     <div className="task-leftMyTask">
                       <h4>{task.judul}</h4> {/* ✅ hapus textDecoration isDone */}

@@ -27,9 +27,8 @@ function AddPageFriend() {
   const [addedIds, setAddedIds] = useState([]);
   const [friendsData, setFriendsData] = useState([]);
 
-  // Ambil user acak & daftar teman saat halaman dibuka
   useEffect(() => {
-    // Ambil user acak
+
     fetch('http://localhost:5000/api/auth/users/random', {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     })
@@ -37,7 +36,6 @@ function AddPageFriend() {
       .then(data => setRandomUsers(data))
       .catch(err => console.error('Gagal ambil user acak:', err));
 
-    // Ambil daftar teman yang sudah ada
     getFriends()
       .then(data => {
         const friendIds = data.map(f => f.friend_id);
@@ -47,7 +45,7 @@ function AddPageFriend() {
       .catch(err => console.error('Gagal ambil friends:', err));
   }, []);
 
-  // Cari user berdasarkan email
+
   const handleSearch = async () => {
     if (!search.trim()) {
       setSearchResult(null);
@@ -72,7 +70,6 @@ function AddPageFriend() {
     }
   };
 
-  // Tambah teman (langsung accepted)
   const handleTambah = async (friendId) => {
     try {
       await sendFriendRequest(friendId);
@@ -84,7 +81,6 @@ function AddPageFriend() {
     }
   };
 
-  // List yang ditampilkan: kalau search ada hasil → tampil hasil, kalau tidak → tampil acak
   const mergedList = [
     ...randomUsers,
     ...friendsData
@@ -156,7 +152,7 @@ function AddPageFriend() {
                     value={search}
                     onChange={(e) => {
                       setSearch(e.target.value);
-                      if (!e.target.value.trim()) setSearchResult(null); // reset kalau kosong
+                      if (!e.target.value.trim()) setSearchResult(null);
                     }}
                     onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                   />

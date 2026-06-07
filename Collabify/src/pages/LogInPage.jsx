@@ -30,7 +30,7 @@ function LogInPage() {
     try {
       setLoading(true);
       const data = await loginApi(email, password);
-      login(data.token, data.user); // simpan ke AuthContext
+      login(data.token, data.user);
       navigate('/home');
     } catch (err) {
       setError(err.message);

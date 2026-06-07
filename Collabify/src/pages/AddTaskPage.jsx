@@ -33,13 +33,13 @@ function AddTaskPage() {
       setLoading(true);
 
       if (tipe === 'group') {
-        // Auto buat group baru dengan nama sama seperti task
+
         const groupData = await createGroup({
           nama_group: judulTask,
           deskripsi: `Group project: ${judulTask}`,
         });
 
-        // Buat task yang terhubung ke group baru
+
         await createTask({
           judul: judulTask,
           tipe: 'group',
@@ -48,7 +48,7 @@ function AddTaskPage() {
         });
 
       } else {
-        // Personal task
+  
         await createTask({
           judul: judulTask,
           tipe: 'personal',

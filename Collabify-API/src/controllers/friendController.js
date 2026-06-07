@@ -2,7 +2,6 @@ const Friend = require('../models/Friend');
 const User = require('../models/User');
 const Notification = require('../models/Notification');
 
-// Kirim permintaan pertemanan
 exports.sendRequest = async (req, res) => {
   try {
     const { friend_id } = req.body;
@@ -16,9 +15,8 @@ exports.sendRequest = async (req, res) => {
     if (sudahAda)
       return res.status(400).json({ message: 'Sudah berteman!' });
 
-    // Langsung accepted tanpa perlu konfirmasi
     await Friend.create({ user_id: req.user.id, friend_id, status: 'accepted' });
-    // Buat juga relasi sebaliknya agar dua arah
+
     await Friend.create({ user_id: friend_id, friend_id: req.user.id, status: 'accepted' });
 
     res.json({ message: 'Berhasil menambahkan teman!' });
@@ -27,10 +25,9 @@ exports.sendRequest = async (req, res) => {
   }
 };
 
-// Terima atau tolak permintaan
 exports.respondRequest = async (req, res) => {
   try {
-    const { status } = req.body; // 'accepted' atau 'rejected'
+    const { status } = req.body;
     const request = await Friend.findByPk(req.params.id);
 
     if (!request) return res.status(404).json({ message: 'Permintaan tidak ditemukan.' });
@@ -42,7 +39,6 @@ exports.respondRequest = async (req, res) => {
   }
 };
 
-// Ambil semua teman
 exports.getFriends = async (req, res) => {
   try {
     const User = require('../models/User');
@@ -50,7 +46,6 @@ exports.getFriends = async (req, res) => {
       where: { user_id: req.user.id, status: 'accepted' }
     });
 
-    // Ambil detail nama & email tiap teman
     const friendDetails = await Promise.all(
       friends.map(async (f) => {
         const user = await User.findByPk(f.friend_id, {
@@ -66,7 +61,6 @@ exports.getFriends = async (req, res) => {
   }
 };
 
-// Ambil permintaan pertemanan masuk
 exports.getPendingRequests = async (req, res) => {
   try {
     const requests = await Friend.findAll({
