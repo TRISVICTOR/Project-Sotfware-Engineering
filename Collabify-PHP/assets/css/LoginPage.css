@@ -1,0 +1,110 @@
+/* container halaman */
+.login-container{
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #E5E6F1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Nunito', sans-serif;
+  overflow: hidden;
+}
+
+/* card login */
+.login-card{
+  width:450px;
+  padding:40px;
+  background:white;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  text-align:center;
+  height: 600px;
+}
+
+/* logo */
+.login-logo{
+  width: 310px;
+  height:auto;
+  margin-bottom:5px;
+  margin-top: -90px;
+  margin-left: -30px;
+}
+
+/* judul */
+.login-card h2{
+  margin-bottom:50px;
+  margin-top: -40px;
+}
+
+/* form */
+.login-form{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+.input-group{
+  display:flex;
+  align-items:center;
+  border:1px solid #000000;
+  border-radius:10px;
+  padding:10px 12px;
+  margin-bottom:20px;
+  background:white;
+  height: 50px;
+}
+
+.email-icon{
+  width:32px;
+  margin-right:10px;
+  margin-left: -4px;
+}
+
+.password-icon{
+  width:43px;
+  margin-right:3px;
+  margin-left: -10px;
+}
+/* input */
+.login-input{
+  padding:12px;
+  font-size:14px;
+  border:none;
+  margin-left: -15px;
+  background: transparent;
+  outline: none;
+  width: 99%;
+}
+
+/* tombol login */
+.login-button{
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  background:#8b6cff;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+}
+
+/* text signup */
+.signup-text{
+  margin-top:20px;
+  font-size:14px;
+}
+
+.signup-text span{
+  color:#3b82f6;
+  cursor:pointer;
+}
+
+/* dekorasi tanaman */
+.login-plant{
+  position: absolute;
+  margin-left: -165px;
+  margin-bottom: -420px;
+  width: 700px;
+  z-index: -1;
+}

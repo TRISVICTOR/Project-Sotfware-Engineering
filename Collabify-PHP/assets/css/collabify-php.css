@@ -1,0 +1,203 @@
+/*
+ * collabify-php.css
+ * Tambahan untuk versi PHP. CSS asli React di folder ini TIDAK diubah;
+ * file ini dimuat paling akhir dan hanya berisi:
+ *  - gaya inline komponen NotificationSound.jsx yang dipindah ke class
+ *  - elemen baru (tombol aksi, daftar anggota, toast pesan, label Overdue)
+ */
+
+/* ================= NOTIFIKASI (dari NotificationSound.jsx) ================= */
+
+.notif { position: relative; display: inline-block; }
+.notif [hidden] { display: none !important; }
+
+.notif-bell {
+  position: relative; background: none; border: none;
+  font-size: 1.5rem; cursor: pointer; padding: 6px; border-radius: 50%;
+}
+
+.notif-badge {
+  position: absolute; top: 0; right: 0;
+  background: #ef4444; color: white; font-size: 0.65rem;
+  font-weight: bold; min-width: 18px; height: 18px;
+  border-radius: 999px; display: flex; align-items: center;
+  justify-content: center; padding: 0 4px;
+}
+
+.notif-dropdown {
+  position: absolute; top: calc(100% + 10px); right: 0;
+  width: 320px; background: white; border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15); z-index: 1000; overflow: hidden;
+  text-align: left;
+}
+
+.notif-overlay { position: fixed; inset: 0; z-index: 999; }
+
+.notif-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 16px; border-bottom: 1px solid #f0f0f0;
+  font-weight: 700; font-size: 1rem; color: #111;
+}
+
+.notif-header button {
+  background: none; border: none; color: #6366f1;
+  font-size: 0.78rem; cursor: pointer; padding: 0; font-weight: 400;
+}
+
+.notif-list { max-height: 360px; overflow-y: auto; }
+
+.notif-kosong { text-align: center; padding: 32px 16px; color: #9ca3af; }
+
+.notif-item {
+  display: flex; align-items: flex-start; gap: 10px; width: 100%;
+  padding: 12px 16px; border: none; border-radius: 0;
+  border-bottom: 1px solid #f9f9f9; background: white;
+  text-align: left; font: inherit; color: inherit;
+}
+button.notif-item { cursor: pointer; }
+.notif-item.notif-belum { background: #eef2ff; }
+.notif-item.notif-urgent { border-left: 3px solid #ef4444; }
+.notif-item.notif-belum.notif-urgent { background: #fee2e2; }
+
+.notif-ikon { font-size: 1.3rem; flex-shrink: 0; }
+.notif-isi { flex: 1; display: block; }
+.notif-label {
+  display: block; font-size: 0.7rem; font-weight: 600;
+  color: #6366f1; text-transform: uppercase;
+}
+.notif-pesan {
+  display: block; font-size: 0.85rem; color: #374151;
+  margin: 2px 0 4px; line-height: 1.4;
+}
+.notif-waktu { display: block; font-size: 0.75rem; color: #9ca3af; }
+.notif-titik {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #6366f1; flex-shrink: 0; margin-top: 6px;
+}
+
+/* ================= PESAN FLASH (toast) ================= */
+
+.flash-toast {
+  position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  z-index: 2000; padding: 10px 20px; border-radius: 10px;
+  font-size: 0.9rem; font-weight: 600;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  transition: opacity 0.4s;
+}
+.flash-error  { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+.flash-sukses { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+.flash-toast.hilang { opacity: 0; pointer-events: none; }
+
+/* ================= LABEL STATUS ================= */
+
+.priority.tag-overdue { background: #e53935; color: #fff; }
+.priority.tag-selesai { background: #e5e7eb; color: #6b7280; }
+
+/* ================= TOMBOL AKSI KECIL (gaya tombol "✓ Selesai" asli) ================= */
+
+.aksi-task { display: flex; gap: 6px; justify-content: flex-end; flex-wrap: wrap; }
+.aksi-task form { display: inline; }
+
+.btn-aksi {
+  margin-top: 6px; font-size: 0.75rem; padding: 3px 10px;
+  border-radius: 12px; background: transparent; cursor: pointer;
+}
+.btn-aksi.kecil { margin-top: 4px; font-size: 0.72rem; padding: 2px 8px; border-radius: 10px; }
+.btn-hijau { border: 1px solid #22c55e; color: #22c55e; }
+.btn-merah { border: 1px solid #ef4444; color: #ef4444; }
+.btn-ungu  { border: 1px solid #6366f1; color: #6366f1; }
+.btn-abu   { border: 1px solid #9ca3af; color: #6b7280; }
+
+/* ================= HALAMAN PROJECT ================= */
+
+.aksi-ketua { display: inline-flex; gap: 6px; margin-left: 10px; vertical-align: middle; }
+.aksi-ketua form { display: inline; }
+
+.anggota-list { list-style: none; margin-top: 6px; }
+.anggota-list li {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.82rem;
+}
+.anggota-list li:last-child { border-bottom: none; }
+.anggota-list .anggota-info { flex: 1; min-width: 0; }
+.anggota-list .anggota-email { display: block; font-size: 0.72rem; color: #aaa; overflow: hidden; text-overflow: ellipsis; }
+.badge-ketua {
+  font-size: 0.65rem; background: #e6e1ff; color: #6c63ff;
+  padding: 1px 6px; border-radius: 6px; margin-left: 4px;
+}
+
+.form-undang { display: flex; gap: 8px; align-items: center; }
+.form-undang .form-input-group { flex: 1; margin-bottom: 0; }
+
+.submission-upload { display: flex; gap: 10px; align-items: center; margin-bottom: 14px; flex-wrap: wrap; }
+.submission-upload select, .submission-upload input { font-size: 0.82rem; }
+.btn-upload {
+  padding: 6px 16px; border-radius: 10px; border: none;
+  background: #6366f1; color: white; cursor: pointer;
+  font-size: 0.82rem; white-space: nowrap;
+}
+
+.submission-item {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 8px 12px; border-radius: 8px; background: #f5f5f5;
+  border: 1px solid #ddd; margin-bottom: 8px;
+}
+.submission-item .nama-file { font-weight: 600; font-size: 0.88rem; margin: 0; word-break: break-all; }
+.submission-item .info-file { font-size: 0.75rem; color: #888; margin: 0; }
+.submission-aksi { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+.submission-aksi form { display: inline; }
+.btn-download {
+  padding: 4px 12px; border-radius: 8px; background: #22c55e;
+  color: white; font-size: 0.78rem; text-decoration: none;
+}
+.btn-download:hover { color: white; }
+.btn-ganti, .btn-hapus-file {
+  display: inline-block; padding: 4px 10px; border-radius: 8px;
+  background: transparent; cursor: pointer; font-size: 0.78rem;
+}
+.btn-ganti { border: 1px solid #6366f1; color: #6366f1; }
+.btn-hapus-file { border: 1px solid #ef4444; color: #ef4444; }
+
+.teks-kosong { color: #aaa; font-size: 0.85rem; }
+
+/* ================= HALAMAN TEMAN ================= */
+
+.form-hapus-teman { margin-left: auto; margin-right: 10px; }
+.btn-hapus-teman {
+  background: transparent; border: 1px solid #ef4444; color: #ef4444;
+  border-radius: 50%; width: 26px; height: 26px; padding: 0;
+  font-size: 0.75rem; cursor: pointer;
+}
+
+/* ================= TOMBOL LIHAT PASSWORD (ikon mata, dibuat app.js) ================= */
+
+.toggle-password {
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  background: transparent; border: none; padding: 0 4px; margin: 0;
+  color: #888; cursor: pointer; line-height: 0;
+}
+.toggle-password:hover { color: #333; }
+.toggle-password .garis-coret { display: none; }          /* password tersembunyi: ikon mata */
+.toggle-password.terlihat .garis-coret { display: inline; } /* password terlihat: mata dicoret */
+
+/* Microsoft Edge punya tombol "reveal password" bawaan; disembunyikan agar tidak ada dua ikon mata */
+input[data-lihat-password]::-ms-reveal,
+input[data-lihat-password]::-ms-clear { display: none; }
+
+/* Halaman Change Password / Username: input berdiri sendiri, jadi dibungkus agar tombol di dalam kotak */
+.password-wrapper { position: relative; align-self: flex-start; }
+.password-wrapper input { padding-right: 46px; }
+.password-wrapper .toggle-password { position: absolute; right: 12px; top: 14px; }
+
+/* ================= FORM EDIT (memakai gaya AddTaskPage) ================= */
+
+.wrapper-tinggi { height: auto !important; min-height: 470px; padding-bottom: 24px; }
+
+.label-form {
+  margin-left: 50px; margin-bottom: 4px;
+  font-size: 0.8rem; color: #777; font-family: ABeeZee, Arial, sans-serif;
+}
+
+.info-lampiran { margin: -6px 0 12px 50px; font-size: 0.85rem; color: #555; }
+.info-lampiran a { color: #6366f1; }
+.info-lampiran label { margin-left: 12px; color: #ef4444; cursor: pointer; }

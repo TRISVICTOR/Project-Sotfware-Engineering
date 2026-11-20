@@ -1,0 +1,3 @@
+# Folder upload tidak boleh diakses langsung.
+# File hanya bisa diunduh lewat Action/download.php (dengan cek hak akses).
+Require all denied

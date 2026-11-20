@@ -1,0 +1,188 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+/* Lock page supaya tidak bisa scroll */
+html,body{
+  height:100%;
+  overflow:hidden;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Container utama */
+.page-containerInformation{
+  height:100vh;
+  box-sizing:border-box;
+  width:100vw;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbarInformation{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px 50px;
+}
+
+.logoInformation{
+  display:flex;
+  align-items:center;
+  height: 30px; 
+  width: 30px;
+}
+
+.logoInformation img{
+  height:200px;
+  width:auto;
+  margin-top:10px;
+}
+
+.menuInformation{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  list-style:none;
+  gap:40px;
+  font-weight:500;
+}
+
+.auth-buttonsInformation{
+  display:flex;
+  gap:10px;
+  margin-right:100px;
+}
+
+.loginInformation{
+  padding:8px 18px;
+  border:1px solid black;
+  background:white;
+  border-radius:8px;
+}
+
+.loginInformation:hover{
+  border:1px solid black;
+}
+
+.signupInformation{
+  padding:8px 18px;
+  border:none;
+  background:#9b6cff;
+  color:white;
+  border-radius:8px;
+}
+
+.ApplicationInformation {
+  display: flex;
+  overflow-y: auto;
+  flex-direction: column;
+  gap: 20px;
+  padding: 40px 200px;
+  flex: 1;
+  background: #e7e3e1;
+}
+
+.feature-section{
+  margin-top: 80px;
+}
+
+.Contact-section{
+  margin-top: 80px;
+}
+
+.info-title{
+  font-size:50px;
+  font-weight:bold;
+  color:#333;
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.info-section{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+.info-desc{
+  font-size:18px;
+  color:#555;
+  margin-top:10px;
+}
+
+.feature-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  margin-top:40px;
+}
+
+.feature-card{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 2px 5px rgba(0,0,0,0.1);
+  border:1px solid #CDC9C6;
+}
+
+.contact-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.contact-item {
+  background: white;
+  padding: 30px 20px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border: 1px solid #e8e4e0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.contact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.whatsapp-icon, .website-icon {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.email-iconAboutUs {
+  width: 60px;
+  height: 60px;
+  min-width: 110px;
+  min-height: 70px;
+  margin-bottom: -15px;
+  margin-top: -6px;
+}
+
+.contact-label {
+  font-size: 0.85rem;
+  color: #999;
+  margin: 0;
+}
+
+.contact-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0;
+}
